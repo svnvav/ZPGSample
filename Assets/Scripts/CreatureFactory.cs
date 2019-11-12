@@ -17,7 +17,7 @@ namespace Svnvav.Samples
 
         [NonSerialized] private Scene _poolScene;
 
-        void CreatePools()
+        private void CreatePools()
         {
             _pools = new List<Creature>[_creatures.Length];
             for (int i = 0; i < _pools.Length; i++)
@@ -35,7 +35,7 @@ namespace Svnvav.Samples
                     .Select(go => go.GetComponent<Creature>());
                 foreach (var shape in inactiveShapes)
                 {
-                    _pools[shape.ShapeId].Add(shape);
+                    _pools[shape.CreatureId].Add(shape);
                 }
                 return;
             }
@@ -68,7 +68,7 @@ namespace Svnvav.Samples
                 {
                     instance = Instantiate(_creatures[shapeId]);
                     instance.OriginFactory = this;
-                    instance.ShapeId = shapeId;
+                    instance.CreatureId = shapeId;
                     SceneManager.MoveGameObjectToScene(instance.gameObject, _poolScene);
                 }
 
@@ -77,7 +77,7 @@ namespace Svnvav.Samples
             else
             {
                 instance = Instantiate(_creatures[shapeId]);
-                instance.ShapeId = shapeId;
+                instance.CreatureId = shapeId;
             }
             
 
@@ -99,7 +99,7 @@ namespace Svnvav.Samples
                     CreatePools();
                 }
 
-                _pools[instanceToRecycle.ShapeId].Add(instanceToRecycle);
+                _pools[instanceToRecycle.CreatureId].Add(instanceToRecycle);
                 instanceToRecycle.gameObject.SetActive(false);
             }
             else

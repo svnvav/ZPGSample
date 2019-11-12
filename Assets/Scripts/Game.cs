@@ -7,9 +7,11 @@ namespace Svnvav.Samples
     public class Game : MonoBehaviour
     {
         public static Game Instance;
+
+        [SerializeField] private Spawner[] _spawners;
         
         private List<Creature> _creatures;
-
+        
         private bool _inGameUpdateLoop;
 
         private void Awake()
@@ -29,7 +31,10 @@ namespace Svnvav.Samples
             {
                 shape.GameUpdate();
             }
-            
+            foreach (var spawner in _spawners)
+            {
+                spawner.GameUpdate();
+            }
             _inGameUpdateLoop = false;
         }
 
