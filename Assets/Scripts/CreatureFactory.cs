@@ -44,9 +44,9 @@ namespace Svnvav.Samples
             _poolScene = SceneManager.CreateScene(name);
         }
 
-        public Creature Get(int shapeId = 0)
+        public T Get<T>(int creatureId = 0) where T : Creature
         {
-            Creature instance;
+            T instance;
 
             if (_recycle)
             {
@@ -55,20 +55,20 @@ namespace Svnvav.Samples
                     CreatePools();
                 }
 
-                List<Creature> pool = _pools[shapeId];
+                List<Creature> pool = _pools[creatureId];
                 int lastIndex = pool.Count - 1;
                 
                 
                 if (lastIndex >= 0)
                 {
-                    instance = pool[lastIndex];
+                    instance = pool[lastIndex] as T;
                     pool.RemoveAt(lastIndex);
                 }
                 else
                 {
-                    instance = Instantiate(_creatures[shapeId]);
+                    instance = Instantiate(_creatures[creatureId]) as T;
                     instance.OriginFactory = this;
-                    instance.CreatureId = shapeId;
+                    instance.CreatureId = creatureId;
                     SceneManager.MoveGameObjectToScene(instance.gameObject, _poolScene);
                 }
 
@@ -76,8 +76,8 @@ namespace Svnvav.Samples
             }
             else
             {
-                instance = Instantiate(_creatures[shapeId]);
-                instance.CreatureId = shapeId;
+                instance = Instantiate(_creatures[creatureId]) as T;
+                instance.CreatureId = creatureId;
             }
             
 
@@ -85,7 +85,7 @@ namespace Svnvav.Samples
             return instance;
         }
         
-        public void Reclaim(Creature instanceToRecycle)
+        public void Reclaim<T>(T instanceToRecycle) where T : Creature
         {
             if (instanceToRecycle.OriginFactory != this) {
                 Debug.LogError("Tried to reclaim shape with wrong factory.");

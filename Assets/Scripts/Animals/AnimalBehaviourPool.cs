@@ -3,7 +3,7 @@
 
 namespace Svnvav.Samples
 {
-    public static class CreatureBehaviourPool<T> where T : CreatureBehaviour, new()
+    public static class AnimalBehaviourPool<T> where T : AnimalBehaviour, new()
     {
         private static Stack<T> _stack = new Stack<T>();
 

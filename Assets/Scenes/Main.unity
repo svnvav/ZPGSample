@@ -418,12 +418,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 805850277}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57008910e7c44b17b24623a9e262d84f, type: 3}
+  m_Script: {fileID: 11500000, guid: c12e7a3a3f7a435d9fb05dad51aa7dd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnSpeed: 6.1
+  _spawnSpeed: 14.6
   _config:
-    factory: {fileID: 11400000, guid: 3eafa5bbe543c8b42bd05b02e6a58ea8, type: 2}
+    factory: {fileID: 11400000, guid: f1269718ee567c04883c8017c0add931, type: 2}
+    searchFoodRadius: 10
 --- !u!1 &1422635762
 GameObject:
   m_ObjectHideFlags: 0

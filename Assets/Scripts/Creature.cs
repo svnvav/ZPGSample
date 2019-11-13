@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Svnvav.Samples
 {
-    public class Creature : MonoBehaviour
+    public abstract class Creature : MonoBehaviour
     {
         private int _creatureId = int.MinValue;
         
@@ -36,39 +36,11 @@ namespace Svnvav.Samples
             }
         }
         
-        protected List<CreatureBehaviour> _behaviours;
-
-        private void Awake()
-        {
-            _behaviours = new List<CreatureBehaviour>();
-        }
-
-        public T AddBehaviour<T>() where T : CreatureBehaviour, new()
-        {
-            var component = CreatureBehaviourPool<T>.Get();
-            _behaviours.Add(component);
-            return component;
-        }
         
-        public void GameUpdate()
-        {
-            for (var i = 0; i < _behaviours.Count; i++)
-            {
-                var behaviour = _behaviours[i];
-                if (!behaviour.GameUpdate(this))
-                {
-                    behaviour.Recycle();
-                    _behaviours.RemoveAt(i--);
-                }
-            }
-        }
+        public abstract void GameUpdate();
 
-        public void Recycle()
+        public virtual void Recycle()
         {
-            for (int i = 0; i < _behaviours.Count; i++) {
-                _behaviours[i].Recycle();
-            }
-            _behaviours.Clear();
             OriginFactory.Reclaim(this);
         }
     }
