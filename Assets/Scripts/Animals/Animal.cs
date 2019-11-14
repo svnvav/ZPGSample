@@ -9,18 +9,10 @@ namespace Svnvav.Samples
         protected List<AnimalBehaviour> _behaviours;
 
         [SerializeField]
-        private float _age;
-        [SerializeField]
-        private float _health;
-        [SerializeField]
-        private float _moveSped;
+        private float _moveSpeed;
 
-        public float Age => _age;
-
-        public float Health => _health;
+        public float MoveSpeed => _moveSpeed;
         
-        public float MoveSpeed => _moveSped;
-
         private void Awake()
         {
             _behaviours = new List<AnimalBehaviour>();

@@ -3,7 +3,7 @@
     public enum AnimalBehaviourType
     {
         SearchFood,
-        Age,
-        Health
+        BasicLife,
+
     }
 }
