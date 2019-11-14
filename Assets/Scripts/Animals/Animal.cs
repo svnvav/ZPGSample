@@ -8,10 +8,9 @@ namespace Svnvav.Samples
         private List<Effect> _effects;
         protected List<AnimalBehaviour> _behaviours;
 
-        [SerializeField]
-        private float _moveSpeed;
+        
 
-        public float MoveSpeed => _moveSpeed;
+        public bool Dead;
         
         private void Awake()
         {
@@ -28,6 +27,10 @@ namespace Svnvav.Samples
         public override void GameUpdate()
         {
             ProcessBehaviours();
+            if (Dead)
+            {
+                Recycle();
+            }
         }
 
         private void ProcessBehaviours()
@@ -52,6 +55,7 @@ namespace Svnvav.Samples
             _behaviours.Clear();
             
             base.Recycle();
+            Dead = false;
         }
     }
 }

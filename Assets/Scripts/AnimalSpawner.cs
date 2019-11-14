@@ -9,6 +9,10 @@ namespace Svnvav.Samples
         {
             public CreatureFactory factory;
             public float searchFoodRadius;
+            public float moveSpeed;
+            public float maxAge;
+            public float maxHunger;
+            public float maxHealth;
         }
         
         [SerializeField] private SpawnConfiguration _config;
@@ -19,7 +23,9 @@ namespace Svnvav.Samples
             animal.gameObject.layer = gameObject.layer;
             animal.transform.position = transform.position;
             animal.AddBehaviour<SearchFoodBehaviour>()
-                .Initialize(animal, _config.searchFoodRadius);
+                .Initialize(animal, _config.searchFoodRadius, _config.moveSpeed);
+            animal.AddBehaviour<BasicLifeBehaviour>()
+                .Initialize(_config.maxAge, _config.maxHealth, _config.maxHunger);
         }
     }
 }

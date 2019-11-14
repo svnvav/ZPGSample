@@ -8,14 +8,19 @@ namespace Svnvav.Samples
         public override AnimalBehaviourType BehaviorType => AnimalBehaviourType.SearchFood;
         
         private float _searchRadius;
+        
+        [SerializeField]
+        private float _moveSpeed;
 
         private Vector3 _wanderPoint;
 
         private NavMeshAgent _navMeshAgent;
 
-        public void Initialize(Animal animal, float searchRadius)
+        public void Initialize(Animal animal, float searchRadius, float moveSpeed)
         {
             _searchRadius = searchRadius;
+
+            _moveSpeed = moveSpeed;
             
             _navMeshAgent = animal.GetComponent<NavMeshAgent>();
             
@@ -25,7 +30,7 @@ namespace Svnvav.Samples
 
         public override bool GameUpdate(Animal animal)
         {
-            _navMeshAgent.speed = animal.MoveSpeed;
+            _navMeshAgent.speed = _moveSpeed;
             var positionDif = animal.transform.position - _wanderPoint;
 
             if (positionDif.x * positionDif.x + positionDif.z * positionDif.z < 0.01f)

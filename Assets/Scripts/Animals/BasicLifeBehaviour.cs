@@ -27,7 +27,7 @@ namespace Svnvav.Samples
         public float Health => _health;
         
 
-        public void Initialize(Animal animal, float maxAge, float maxHealth, float maxHunger)
+        public void Initialize(float maxAge, float maxHealth, float maxHunger)
         {
             _maxAge = maxAge;
             _age = maxAge;
@@ -43,6 +43,7 @@ namespace Svnvav.Samples
         {
             if (_health < 0f)
             {
+                animal.Dead = true;
                 return false;
             }
 
