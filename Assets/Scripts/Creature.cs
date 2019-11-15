@@ -43,5 +43,10 @@ namespace Svnvav.Samples
         {
             OriginFactory.Reclaim(this);
         }
+
+        public void Die()
+        {
+            Game.Instance.Kill(this);
+        }
     }
 }

@@ -1,9 +1,11 @@
-using UnityEditor;
+
+using UnityEngine;
 
 namespace Svnvav.Samples
 {
-    public abstract class Effect
+    [System.Serializable]
+    public abstract class Effect : MonoBehaviour
     {
-        public virtual void Apply(Animal animal){}
+        public abstract bool Apply(Animal animal);
     }
 }

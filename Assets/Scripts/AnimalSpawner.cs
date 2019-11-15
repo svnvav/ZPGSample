@@ -22,10 +22,11 @@ namespace Svnvav.Samples
             Animal animal = _config.factory.Get<Animal>();
             animal.gameObject.layer = gameObject.layer;
             animal.transform.position = transform.position;
+            animal.Initialize(_config.moveSpeed);
             animal.AddBehaviour<SearchFoodBehaviour>()
-                .Initialize(animal, _config.searchFoodRadius, _config.moveSpeed);
+                .Initialize(animal, _config.searchFoodRadius);
             animal.AddBehaviour<BasicLifeBehaviour>()
-                .Initialize(_config.maxAge, _config.maxHealth, _config.maxHunger);
+                .Initialize(animal, _config.maxAge, _config.maxHealth, _config.maxHunger);
         }
     }
 }

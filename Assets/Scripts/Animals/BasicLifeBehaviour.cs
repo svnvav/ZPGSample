@@ -14,58 +14,46 @@ namespace Svnvav.Samples
         [SerializeField]
         private float _maxHunger;
         
-        [SerializeField]
-        private float _age;
-        [SerializeField]
-        private float _health;
-        [SerializeField]
-        private float _hunger;
-        
 
-        public float Age => _age;
 
-        public float Health => _health;
-        
-
-        public void Initialize(float maxAge, float maxHealth, float maxHunger)
+        public void Initialize(Animal animal, float maxAge, float maxHealth, float maxHunger)
         {
             _maxAge = maxAge;
-            _age = maxAge;
-
             _maxHealth = maxHealth;
-            _health = maxHealth;
-
             _maxHunger = maxHunger;
-            _hunger = 0;
+
+            animal.Age = maxAge;
+            animal.Health = maxHealth;
+            animal.Hunger = maxHunger;
         }
 
         public override bool GameUpdate(Animal animal)
         {
-            if (_health < 0f)
+            if (animal.Health < 0f)
             {
                 animal.Dead = true;
                 return false;
             }
 
-            if (_health > _maxHealth)
+            if (animal.Health > _maxHealth)
             {
-                _health -= Time.deltaTime;
+                animal.Health -= Time.deltaTime;
             }
-            if (_age > _maxAge)
+            if (animal.Age > _maxAge)
             {
-                _health -= Time.deltaTime;
+                animal.Health -= Time.deltaTime;
             }
             
-            if (_hunger > _maxHunger)
+            if (animal.Hunger > _maxHunger)
             {
-                _health -= Time.deltaTime;
+                animal.Health -= Time.deltaTime;
             }
             else
             {
-                _hunger += Time.deltaTime;
+                animal.Hunger += Time.deltaTime;
             }
 
-            _age += Time.deltaTime;
+            animal.Age += Time.deltaTime;
 
             return true;
         }

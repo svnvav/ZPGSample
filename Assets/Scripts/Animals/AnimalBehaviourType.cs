@@ -4,6 +4,5 @@
     {
         SearchFood,
         BasicLife,
-
     }
 }
