@@ -35,18 +35,20 @@ namespace Svnvav.Samples
                 }
             }
         }
-        
-        public bool IsAlive { get; set; }
-        
+
+        [SerializeField]
+        private bool _isAlive;
+
+        public bool IsAlive
+        {
+            get => _isAlive;
+            set => _isAlive = value;
+        }
+
         public abstract void GameUpdate();
 
         public virtual void Recycle()
         {
-            if (OriginFactory == null)
-            {
-                Destroy(gameObject);
-                return;
-            }
             OriginFactory.Reclaim(this);
         }
 

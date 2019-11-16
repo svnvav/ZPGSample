@@ -19,6 +19,7 @@ namespace Svnvav.Samples
         {
             _target.PassEffects(animal);
             _target.Die();
+            animal.AddBehaviour<SearchFoodBehaviour>().Initialize(animal);
             return false;
         }
 

@@ -43,7 +43,7 @@ namespace Svnvav.Samples
             foreach (var collider in colliders)
             {
                 var plant = collider.GetComponent<Plant>();
-                if (plant != null)
+                if (plant != null && plant.IsAlive)
                 {
                     animal.AddBehaviour<GoToFoodBehaviour>()
                         .Initialize(animal, plant);

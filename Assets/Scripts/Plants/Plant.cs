@@ -1,10 +1,14 @@
 
+using UnityEngine;
+
 namespace Svnvav.Samples
 {
     public class Plant : Creature
     {
         
         private Effect[] _effects;
+
+        [SerializeField] private float _age = 10f;
 
         private void OnEnable()
         {
@@ -14,7 +18,6 @@ namespace Svnvav.Samples
 
         public override void GameUpdate()
         {
-            
         }
 
         public void PassEffects(Animal animal)

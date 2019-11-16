@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad3e6bbbc1ae4f089b659bd82c4e04c8, type: 3}
-  m_Name: AnimalFactory
+  m_Name: CreatureFactory
   m_EditorClassIdentifier: 
   _creatures:
   - {fileID: 2739645739627718302, guid: 49550090982a134478535a3096b38352, type: 3}
+  - {fileID: 578883026030136669, guid: 952f8502f6d1f984a8a502b63dda857a, type: 3}
   _recycle: 1

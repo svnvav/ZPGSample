@@ -4,12 +4,13 @@ namespace Svnvav.Samples
 {
     public class AnimalSpawner : Spawner
     {
+        public CreatureFactory factory;
+        
         [SerializeField] private AnimalSpawnConfiguration _config;
         
         public override void Spawn()
         {
-            Animal animal = _config.factory.Get<Animal>();
-            animal.gameObject.layer = gameObject.layer;
+            Animal animal = factory.Get<Animal>();
             animal.transform.position = transform.position;
             animal.Initialize(_config);
             animal.AddBehaviour<SearchFoodBehaviour>()
