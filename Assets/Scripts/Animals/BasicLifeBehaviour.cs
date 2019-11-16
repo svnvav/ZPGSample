@@ -31,7 +31,7 @@ namespace Svnvav.Samples
         {
             if (animal.Health < 0f)
             {
-                animal.Dead = true;
+                animal.IsAlive = false;
                 return false;
             }
 

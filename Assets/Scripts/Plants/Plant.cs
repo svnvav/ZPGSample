@@ -3,10 +3,12 @@ namespace Svnvav.Samples
 {
     public class Plant : Creature
     {
+        
         private Effect[] _effects;
 
         private void OnEnable()
         {
+            IsAlive = true;
             _effects = GetComponents<Effect>();
         }
 

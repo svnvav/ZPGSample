@@ -7,14 +7,15 @@ namespace Svnvav.Samples
 {
     public class Animal : Creature
     {
+
+        public AnimalSpawnConfiguration Config;
+        
         private List<Effect> _effects;
         protected List<AnimalBehaviour> _behaviours;
         
         private NavMeshAgent _navMeshAgent;
 
         public NavMeshAgent NavMeshAgent => _navMeshAgent;
-
-        public bool Dead { get; set; }
 
         #region Props
         [SerializeField]
@@ -43,16 +44,7 @@ namespace Svnvav.Samples
             get => _hunger;
             set => _hunger = value;
         }
-
-        public float MoveSpeed
-        {
-            get => _moveSpeed;
-            set
-            {
-                _moveSpeed = value;
-                _navMeshAgent.speed = value;
-            }
-        }
+        
 
         #endregion
 
@@ -63,22 +55,21 @@ namespace Svnvav.Samples
             _navMeshAgent = GetComponent<NavMeshAgent>();
         }
 
-        public void Initialize(float moveSpeed)
+        public void Initialize(AnimalSpawnConfiguration config)
         {
-            Dead = false;
+            IsAlive = true;
             _hunger = 0;
             _health = 0;
             _age = 0;
-            _moveSpeed = moveSpeed;
+            Config = config;
         }
 
         public override void GameUpdate()
         {
             ProcessBehaviours();
             ProcessEffects();
-            if (Dead)
+            if (!IsAlive)
             {
-                Debug.Log(_age);
                 Die();
             }
         }
@@ -129,7 +120,7 @@ namespace Svnvav.Samples
             _behaviours.Clear();
             
             base.Recycle();
-            Dead = false;
+            IsAlive = true;
         }
     }
 }

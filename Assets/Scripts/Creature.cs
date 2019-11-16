@@ -36,16 +36,23 @@ namespace Svnvav.Samples
             }
         }
         
+        public bool IsAlive { get; set; }
         
         public abstract void GameUpdate();
 
         public virtual void Recycle()
         {
+            if (OriginFactory == null)
+            {
+                Destroy(gameObject);
+                return;
+            }
             OriginFactory.Reclaim(this);
         }
 
         public void Die()
         {
+            IsAlive = false;
             Game.Instance.Kill(this);
         }
     }

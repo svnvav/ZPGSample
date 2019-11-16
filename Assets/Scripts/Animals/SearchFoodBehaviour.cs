@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace Svnvav.Samples
 {
@@ -11,12 +10,13 @@ namespace Svnvav.Samples
 
         private Vector3 _wanderPoint;
 
-        public void Initialize(Animal animal, float searchRadius)
+        public void Initialize(Animal animal)
         {
-            _searchRadius = searchRadius;
+            _searchRadius = animal.Config.searchFoodRadius;
 
             _wanderPoint = NewWanderPoint(animal.transform.position);
             animal.NavMeshAgent.SetDestination(_wanderPoint);
+            animal.NavMeshAgent.speed = animal.Config.moveSpeed;
         }
 
         public override bool GameUpdate(Animal animal)
@@ -45,7 +45,8 @@ namespace Svnvav.Samples
                 var plant = collider.GetComponent<Plant>();
                 if (plant != null)
                 {
-                    animal.NavMeshAgent.SetDestination(plant.transform.position);
+                    animal.AddBehaviour<GoToFoodBehaviour>()
+                        .Initialize(animal, plant);
                     return false;
                 }
             }
