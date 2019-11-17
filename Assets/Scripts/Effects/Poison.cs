@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Svnvav.Samples
 {
-    public class HungerQuencher : Effect
+    public class Poison : Effect
     {
         [SerializeField]
         private float _value;
