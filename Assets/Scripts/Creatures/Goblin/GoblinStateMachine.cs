@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,31 +7,35 @@ namespace Svnvav.Samples
     {
         [SerializeField] private StateComponent Dead;
         [SerializeField] private StateComponent Dying;
-        [SerializeField] private StateComponent SearchFood;
-        [SerializeField] private StateComponent GoToFood;
+        [SerializeField] private StateComponent Search;
+        [SerializeField] private StateComponent GoToTarget;
         [SerializeField] private StateComponent Eating;
+        [SerializeField] private StateComponent Grab;
         [SerializeField] private StateComponent Attack;
 
-        protected override StateComponent InitState => SearchFood;
+        protected override StateComponent InitState => Search;
 
         protected override Dictionary<StateTransition, StateComponent> Transitions => new Dictionary<StateTransition, StateComponent>()
             {
-                {new StateTransition(Dead, Command.Spawn), SearchFood},
+                {new StateTransition(Dead, Command.Spawn), Search},
                 
-                {new StateTransition(SearchFood, Command.Die), Dying},
-                {new StateTransition(SearchFood, Command.FoundFood), GoToFood},
-                {new StateTransition(SearchFood, Command.EnemyFound), Attack},
-                
-                {new StateTransition(GoToFood, Command.Die), Dying},
-                {new StateTransition(GoToFood, Command.FoodReached), Eating},
-                {new StateTransition(GoToFood, Command.Lost), SearchFood},
-                {new StateTransition(GoToFood, Command.EnemyFound), Attack},
+                {new StateTransition(Search, Command.Die), Dying},
+                {new StateTransition(Search, Command.TargetFound), GoToTarget},
+
+                {new StateTransition(GoToTarget, Command.Die), Dying},
+                {new StateTransition(GoToTarget, Command.FoodFound), Eating},
+                {new StateTransition(GoToTarget, Command.TargetLost), Search},
+                {new StateTransition(GoToTarget, Command.EnemyFound), Attack},
+                {new StateTransition(GoToTarget, Command.ItemFound), Grab},
                 
                 {new StateTransition(Attack, Command.Die), Dead},
-                {new StateTransition(Attack, Command.EnemyDead), SearchFood},
+                {new StateTransition(Attack, Command.TargetLost), Search},
                 
-                {new StateTransition(Eating, Command.Die), Dying},
-                {new StateTransition(Eating, Command.Ate), SearchFood},
+                {new StateTransition(Eating, Command.Die), Dead},
+                {new StateTransition(Eating, Command.TargetLost), Search},
+                
+                {new StateTransition(Grab, Command.Die), Dead},
+                {new StateTransition(Grab, Command.TargetLost), Search},
                 
                 {new StateTransition(Dying, Command.Die), Dead},
             };

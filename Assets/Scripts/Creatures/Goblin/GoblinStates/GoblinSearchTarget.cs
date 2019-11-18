@@ -1,10 +1,10 @@
-using System;
+
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Svnvav.Samples
 {
-    public class SearchFood : StateComponent
+    public class GoblinSearchTarget : StateComponent
     {
         [SerializeField] private float _searchRadius;
         private Vector3 _wanderPoint;
@@ -13,6 +13,7 @@ namespace Svnvav.Samples
 
         public override void Enter(Creature goblin)
         {
+            goblin.Target = null;
             _goblin = (Goblin) goblin;
             _wanderPoint = NewWanderPoint(goblin.transform.position);
             _goblin.NavMeshAgent.SetDestination(_wanderPoint);
@@ -20,6 +21,8 @@ namespace Svnvav.Samples
         
         public override void GameUpdate(Creature goblin)
         {
+            CheckSearchArea(_goblin);
+            
             var positionDif = goblin.transform.position - _wanderPoint;
             
             if (positionDif.x * positionDif.x + positionDif.z * positionDif.z < 0.01f)
@@ -27,10 +30,9 @@ namespace Svnvav.Samples
                 _wanderPoint = NewWanderPoint(goblin.transform.position);
                 _goblin.NavMeshAgent.SetDestination(_wanderPoint);
             }
-            CheckNearCreatures(_goblin);
         }
         
-        private void CheckNearCreatures(Goblin goblin)
+        private void CheckSearchArea(Goblin goblin)
         {
             var position = goblin.transform.position;
             var colliders = Physics.OverlapSphere(
@@ -43,14 +45,23 @@ namespace Svnvav.Samples
                 if (enemy != null && enemy.IsAlive)
                 {
                     goblin.Target = enemy.transform;
-                    goblin.StateMachine.MoveNext(Command.EnemyFound);
+                    goblin.StateMachine.MoveNext(Command.TargetFound);
                     break;
                 }
+                
+                var item = collider.GetComponent<Item>();
+                if (item != null)
+                {
+                    goblin.Target = item.transform;
+                    goblin.StateMachine.MoveNext(Command.TargetFound);
+                    break;
+                }
+                
                 var plant = collider.GetComponent<Plant>();
                 if (plant != null && plant.IsAlive)
                 {
                     goblin.Target = plant.transform;
-                    goblin.StateMachine.MoveNext(Command.FoundFood);
+                    goblin.StateMachine.MoveNext(Command.TargetFound);
                     break;
                 }
             }

@@ -13,21 +13,17 @@ namespace Svnvav.Samples
         {
             _goblin = (Goblin) goblin;
             _plant = _goblin.Target.GetComponent<Plant>();
-            if (_plant == null || !_plant.IsAlive)
-            {
-                _goblin.StateMachine.MoveNext(Command.Ate);
-            }
         }
         
         public override void GameUpdate(Creature goblin)
         {
-            var effects = Eat(_plant);
-            goblin.TakeEffects(effects);
             if (_plant == null || !_plant.IsAlive)
             {
-                goblin.StateMachine.MoveNext(Command.Ate);
+                goblin.StateMachine.MoveNext(Command.TargetLost);
+                return;
             }
-            
+            var effects = Eat(_plant);
+            goblin.TakeEffects(effects);
         }
 
         public override void Exit(Creature goblin)

@@ -4,20 +4,16 @@ namespace Svnvav.Samples
     {
         //Common
         Die,
-        Lost,
         Spawn,
-        EnemyDead,
-        EnemyLost,
-        EnemyFound,
+        TargetFound,
+        TargetLost,
+        ItemFound,
         //Goblin
-        FoundFood,
-        FoodReached,
-        Ate,
+        EnemyFound,
+        FoodFound,
         //Skyvan
-        FoundStealTarget,
+        InventoryFound,
         SeenByEnemy,
-        ReachedStealTarget,
-        Stole,
         Escaped
     }
 }

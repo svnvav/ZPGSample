@@ -16,7 +16,7 @@ namespace Svnvav.Samples
         public override void GameUpdate(Creature creature)
         {
             _remain -= Time.deltaTime;
-            if (_remain < 0f)
+            if (_remain < 0f && creature.IsAlive)
             {
                 creature.StateMachine.MoveNext(Command.Die);
             }

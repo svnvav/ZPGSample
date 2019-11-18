@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Svnvav.Samples
 {
-    public class Creature : MonoBehaviour
+    public abstract class Creature : MonoBehaviour
     {
         private List<Effect> _effects;
         
@@ -12,6 +12,10 @@ namespace Svnvav.Samples
         
         [SerializeField] private Inventory _inventory;
         public Inventory Inventory => _inventory;
+        
+        public Transform Target { get; set; }
+
+        public abstract bool IsAlive { get; }
 
         private void Awake()
         {

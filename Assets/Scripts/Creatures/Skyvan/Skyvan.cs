@@ -10,10 +10,8 @@ namespace Svnvav.Samples
         public NavMeshAgent NavMeshAgent => _navMeshAgent;
 
         [SerializeField] private LifeBehaviour _lifeBehaviour;
-        
-        public Transform Target { get; set; }
-        
-        public bool IsAlive => _lifeBehaviour.Health > 0f;
+
+        public override bool IsAlive => _lifeBehaviour.Health > 0f;
 
         protected override void GameUpdate()
         {

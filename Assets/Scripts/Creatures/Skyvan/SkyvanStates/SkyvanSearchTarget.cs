@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Svnvav.Samples
 {
-    public class SearchStealTarget : StateComponent
+    public class SkyvanSearchTarget : StateComponent
     {
         [SerializeField] private float _searchRadius;
         private Vector3 _wanderPoint;
@@ -10,6 +10,7 @@ namespace Svnvav.Samples
         private Skyvan _skyvan;
         public override void Enter(Creature creature)
         {
+            creature.Target = null;
             _skyvan = (Skyvan) creature;
             _wanderPoint = NewWanderPoint(_skyvan.transform.position);
             _skyvan.NavMeshAgent.SetDestination(_wanderPoint);
@@ -24,7 +25,7 @@ namespace Svnvav.Samples
                 _wanderPoint = NewWanderPoint(creature.transform.position);
                 _skyvan.NavMeshAgent.SetDestination(_wanderPoint);
             }
-            CheckNearCreatures(_skyvan);
+            CheckSearchArea(_skyvan);
         }
 
         public override void Exit(Creature creature)
@@ -32,7 +33,7 @@ namespace Svnvav.Samples
             
         }
         
-        private void CheckNearCreatures(Skyvan skyvan)
+        private void CheckSearchArea(Skyvan skyvan)
         {
             var position = skyvan.transform.position;
             var colliders = Physics.OverlapSphere(
@@ -41,11 +42,18 @@ namespace Svnvav.Samples
 
             foreach (var collider in colliders)
             {
-                var enemy = collider.GetComponent<Goblin>();
-                if (enemy != null)
+                var target = collider.GetComponent<Goblin>();
+                if (target != null && target.IsAlive)
                 {
-                    skyvan.Target = enemy.transform;
-                    skyvan.StateMachine.MoveNext(Command.FoundStealTarget);
+                    skyvan.Target = target.transform;
+                    skyvan.StateMachine.MoveNext(Command.TargetFound);
+                    break;
+                }
+                var item = collider.GetComponent<Item>();
+                if (item != null)
+                {
+                    skyvan.Target = item.transform;
+                    skyvan.StateMachine.MoveNext(Command.TargetFound);
                     break;
                 }
             }

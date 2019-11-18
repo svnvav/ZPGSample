@@ -19,9 +19,11 @@ GameObject:
   - component: {fileID: 6352348457674195501}
   - component: {fileID: 2514986696033600230}
   - component: {fileID: 4028416147807356692}
-  - component: {fileID: 5346170550375384837}
-  - component: {fileID: 3964485433268636932}
   - component: {fileID: 5613437395121352341}
+  - component: {fileID: 3964485433268636932}
+  - component: {fileID: 5346170550375384837}
+  - component: {fileID: -1087434298521700747}
+  - component: {fileID: -8911943220720128264}
   m_Layer: 0
   m_Name: Goblin
   m_TagString: Untagged
@@ -185,10 +187,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Dead: {fileID: 2514986696033600230}
   Dying: {fileID: 4028416147807356692}
-  SearchFood: {fileID: 5613437395121352341}
-  GoToFood: {fileID: 3964485433268636932}
+  Search: {fileID: 5613437395121352341}
+  GoToTarget: {fileID: 3964485433268636932}
   Eating: {fileID: 5346170550375384837}
-  Attack: {fileID: 0}
+  Grab: {fileID: -1087434298521700747}
+  Attack: {fileID: -8911943220720128264}
 --- !u!114 &2514986696033600230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,32 +217,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _duration: 0
---- !u!114 &5346170550375384837
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4662127889624654775}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2668807fc72946adab57bcc316721191, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _plant: {fileID: 0}
---- !u!114 &3964485433268636932
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4662127889624654775}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5555cff719234e2c98b7f074f101fc08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _plant: {fileID: 0}
 --- !u!114 &5613437395121352341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,3 +230,56 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _searchRadius: 15
+--- !u!114 &3964485433268636932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4662127889624654775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5555cff719234e2c98b7f074f101fc08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyDetectionRadius: 10
+--- !u!114 &5346170550375384837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4662127889624654775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2668807fc72946adab57bcc316721191, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _plant: {fileID: 0}
+--- !u!114 &-1087434298521700747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4662127889624654775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15faddae660f452f8faa72373c2b2e2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-8911943220720128264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4662127889624654775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb03e016403d40319d72727c833f8c8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damagePerSecond: 100
+  _attackRange: 2
+  _enemy: {fileID: 0}

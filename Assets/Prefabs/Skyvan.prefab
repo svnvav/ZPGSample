@@ -19,10 +19,11 @@ GameObject:
   - component: {fileID: 4562952156890072049}
   - component: {fileID: 2514986696033600230}
   - component: {fileID: 4028416147807356692}
-  - component: {fileID: 2529675362318918317}
-  - component: {fileID: 6913465522596878008}
   - component: {fileID: 6826070386851220418}
+  - component: {fileID: 6913465522596878008}
   - component: {fileID: 1999952943578994135}
+  - component: {fileID: 677479059495072979}
+  - component: {fileID: 2529675362318918317}
   m_Layer: 0
   m_Name: Skyvan
   m_TagString: Untagged
@@ -186,9 +187,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Dead: {fileID: 2514986696033600230}
   Dying: {fileID: 4028416147807356692}
-  SearchStealTarget: {fileID: 6826070386851220418}
-  GoToStealTarget: {fileID: 6913465522596878008}
+  Search: {fileID: 6826070386851220418}
+  GoToTarget: {fileID: 6913465522596878008}
   Steal: {fileID: 1999952943578994135}
+  Grab: {fileID: 677479059495072979}
   Escape: {fileID: 2529675362318918317}
 --- !u!114 &2514986696033600230
 MonoBehaviour:
@@ -215,33 +217,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _duration: 0
---- !u!114 &2529675362318918317
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4662127889624654775}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 259bf178bccc45d1a543670a031c74ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _stealTarget: {fileID: 0}
-  _searchRadius: 30
---- !u!114 &6913465522596878008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4662127889624654775}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af5347bbfca24091a0072aefb3985aba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _stealTarget: {fileID: 0}
 --- !u!114 &6826070386851220418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,6 +230,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _searchRadius: 30
+--- !u!114 &6913465522596878008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4662127889624654775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5347bbfca24091a0072aefb3985aba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1999952943578994135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,3 +255,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stealTarget: {fileID: 0}
+  _duration: 1
+--- !u!114 &677479059495072979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4662127889624654775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15faddae660f452f8faa72373c2b2e2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2529675362318918317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4662127889624654775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 259bf178bccc45d1a543670a031c74ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stealTarget: {fileID: 0}
+  _escapeDistance: 50
