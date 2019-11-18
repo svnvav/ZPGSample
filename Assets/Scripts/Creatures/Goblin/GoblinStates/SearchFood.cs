@@ -27,10 +27,10 @@ namespace Svnvav.Samples
                 _wanderPoint = NewWanderPoint(goblin.transform.position);
                 _goblin.NavMeshAgent.SetDestination(_wanderPoint);
             }
-            CheckNearPlant(_goblin);
+            CheckNearCreatures(_goblin);
         }
         
-        private void CheckNearPlant(Goblin goblin)
+        private void CheckNearCreatures(Goblin goblin)
         {
             var position = goblin.transform.position;
             var colliders = Physics.OverlapSphere(
@@ -39,6 +39,13 @@ namespace Svnvav.Samples
 
             foreach (var collider in colliders)
             {
+                var enemy = collider.GetComponent<Skyvan>();
+                if (enemy != null && enemy.IsAlive)
+                {
+                    goblin.Target = enemy.transform;
+                    goblin.StateMachine.MoveNext(Command.EnemyFound);
+                    break;
+                }
                 var plant = collider.GetComponent<Plant>();
                 if (plant != null && plant.IsAlive)
                 {

@@ -27,7 +27,7 @@ namespace Svnvav.Samples
 
         public Effect[] ToBeEaten(Eater eater)
         {
-            _health -= 1f;
+            _health -= Time.deltaTime;
             return _effects;
         }
     }

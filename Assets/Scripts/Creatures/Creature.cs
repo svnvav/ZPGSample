@@ -8,9 +8,11 @@ namespace Svnvav.Samples
         private List<Effect> _effects;
         
         [SerializeField] private CreatureStateMachine _stateMachine;
-
         public CreatureStateMachine StateMachine => _stateMachine;
         
+        [SerializeField] private Inventory _inventory;
+        public Inventory Inventory => _inventory;
+
         private void Awake()
         {
             StateMachine.Initialize(this);

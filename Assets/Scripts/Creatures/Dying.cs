@@ -1,16 +1,28 @@
+using UnityEngine;
+
 namespace Svnvav.Samples
 {
     public class Dying : StateComponent
     {
-        public override void Enter(Creature goblin)
+        [SerializeField] private float _duration;
+
+        private float _remain;
+        
+        public override void Enter(Creature creature)
         {
+            _remain = _duration;
         }
         
-        public override void GameUpdate(Creature goblin)
+        public override void GameUpdate(Creature creature)
         {
+            _remain -= Time.deltaTime;
+            if (_remain < 0f)
+            {
+                creature.StateMachine.MoveNext(Command.Die);
+            }
         }
 
-        public override void Exit(Creature goblin)
+        public override void Exit(Creature creature)
         {
         }
     }

@@ -64,5 +64,10 @@ namespace Svnvav.Samples
         public override void Exit(Creature goblin)
         {
         }
+
+        public void TakeDamage(float value)
+        {
+            _health -= value;
+        }
     }
 }

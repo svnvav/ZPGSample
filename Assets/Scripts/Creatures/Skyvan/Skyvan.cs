@@ -9,10 +9,11 @@ namespace Svnvav.Samples
         [SerializeField] private NavMeshAgent _navMeshAgent;
         public NavMeshAgent NavMeshAgent => _navMeshAgent;
 
-        [SerializeField] private StateComponent _lifeBehaviour;
-        
+        [SerializeField] private LifeBehaviour _lifeBehaviour;
         
         public Transform Target { get; set; }
+        
+        public bool IsAlive => _lifeBehaviour.Health > 0f;
 
         protected override void GameUpdate()
         {
