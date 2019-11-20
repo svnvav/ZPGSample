@@ -33,7 +33,7 @@ namespace Svnvav.Samples
         
         public void Clear () {
             foreach (GameTile tile in tiles) {
-                tile.Content = contentFactory.Get(GameTileContentType.Empty);
+                tile.Content = contentFactory.Get(GameTileType.Empty);
             }
         }
     }

@@ -9,12 +9,12 @@ namespace Svnvav.Samples
         [SerializeField] private GameTileContent emptyPrefab = default;
         [SerializeField] private GameTileContent wallPrefab = default;
 
-        public GameTileContent Get(GameTileContentType type)
+        public GameTileContent Get(GameTileType type)
         {
             switch (type)
             {
-                case GameTileContentType.Empty: return Get(emptyPrefab);
-                case GameTileContentType.Wall: return Get(wallPrefab);
+                case GameTileType.Empty: return Get(emptyPrefab);
+                case GameTileType.Wall: return Get(wallPrefab);
             }
 
             Debug.Assert(false, "Unsupported non-tower type: " + type);

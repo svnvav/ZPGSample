@@ -1,6 +1,6 @@
 namespace Svnvav.Samples
 {
-    public enum GameTileContentType
+    public enum GameTileType
     {
         Empty,
         Wall

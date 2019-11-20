@@ -4,8 +4,8 @@ namespace Svnvav.Samples
 {
     public class GameTileContent : MonoBehaviour
     {
-        [SerializeField] private GameTileContentType _type = default;
-        public GameTileContentType Type => _type;
+        [SerializeField] private GameTileType _type = default;
+        public GameTileType Type => _type;
         
         private GameTileContentFactory originFactory;
         public GameTileContentFactory OriginFactory {
@@ -17,7 +17,7 @@ namespace Svnvav.Samples
         }
         
         public bool BlocksPath =>
-            Type == GameTileContentType.Wall;
+            Type == GameTileType.Wall;
 
         public void Recycle () {
             originFactory.Reclaim(this);
