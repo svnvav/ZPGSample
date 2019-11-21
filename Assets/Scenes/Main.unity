@@ -432,6 +432,16 @@ PrefabInstance:
       propertyPath: _keyPoints.Array.data[2]
       value: 
       objectReference: {fileID: 619218657}
+    - target: {fileID: 4988307473216620558, guid: fa7230763866e5d4db0674230714d232,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3415408008093217505, guid: fa7230763866e5d4db0674230714d232,
+        type: 3}
+      propertyPath: _speed
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa7230763866e5d4db0674230714d232, type: 3}
 --- !u!1 &585847187

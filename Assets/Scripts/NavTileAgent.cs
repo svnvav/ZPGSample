@@ -15,6 +15,10 @@ namespace Svnvav.Samples
             set => _speed = value;
         }
 
+        public Action OnNextTileStep;
+
+        public Vector3 MoveDirection => (_nextPoint - _prevPoint).normalized;
+
         private Tilemap _tilemap;
         
         private Vector3[] _path;
@@ -70,6 +74,7 @@ namespace Svnvav.Samples
                     _pathPointsTransition = diff.magnitude;
                 }
             }
+            OnNextTileStep?.Invoke();
 
             _moving = true;
             return true;
@@ -103,12 +108,14 @@ namespace Svnvav.Samples
                     transform.position = _path[_pathStep - 1];
                     _pathPointsTransition = 0f;
                     _moving = false;
+                    OnNextTileStep?.Invoke();
                     return;
                 }
 
                 _prevPoint = _nextPoint;
                 _nextPoint = _path[_pathStep];
             }
+            OnNextTileStep?.Invoke();
             transform.position = Vector3.Lerp(_prevPoint, _nextPoint, _pathPointsTransition);
         }
     }

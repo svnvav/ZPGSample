@@ -281,6 +281,7 @@ MonoBehaviour:
   _inventory: {fileID: 6288391439629820274}
   navTileAgent: {fileID: 3415408008093217505}
   _lifeBehaviour: {fileID: 6435465404045056598}
+  _model: {fileID: 4988307473216620558}
 --- !u!114 &6435465404045056598
 MonoBehaviour:
   m_ObjectHideFlags: 0
