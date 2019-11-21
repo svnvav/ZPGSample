@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: PixelArt
+  m_Script: {fileID: 11500000, guid: a7b2e42451d640d48582240b4c296e94, type: 3}
+  m_Name: Wall
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 21300000, guid: 6c55226199497fd4ea76d2f3558d27ee, type: 3}
-  m_Color: {r: 0.3584906, g: 0.20238948, b: 0.113296546, a: 1}
+  m_Color: {r: 0.34951788, g: 0.2214756, b: 0.745283, a: 1}
   m_Transform:
     e00: 1
     e01: 0
@@ -34,3 +34,4 @@ MonoBehaviour:
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
   m_ColliderType: 1
+  type: 1
