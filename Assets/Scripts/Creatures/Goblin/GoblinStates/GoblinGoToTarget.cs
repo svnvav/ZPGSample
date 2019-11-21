@@ -5,12 +5,14 @@ namespace Svnvav.Samples
     public class GoblinGoToTarget : StateComponent
     {
         [SerializeField] private float _enemyDetectionRadius;
+        [SerializeField] private float _targetReachedRadius;
         
         private Goblin _goblin;
 
-        public override void Enter(Creature goblin)
+        public override void Enter(Creature creature)
         {
-            _goblin = (Goblin) goblin;
+            _goblin = (Goblin) creature;
+            creature.Animator.Play("Walk");
         }
         
         public override void GameUpdate(Creature creature)
@@ -23,18 +25,19 @@ namespace Svnvav.Samples
 
             var positionDif = transform.position - _goblin.Target.position;
             
-            if (positionDif.x * positionDif.x + positionDif.z * positionDif.z < 1.5f)
+            if (positionDif.x * positionDif.x + positionDif.y * positionDif.y < _targetReachedRadius * _targetReachedRadius)
             {
                 OnTargetReach();
             }
             else
             {
-                _goblin.NavMeshAgent.SetDestination(_goblin.Target.position);
+                _goblin.NavTileAgent.SetDestination(_goblin.Target.position);
             }
         }
         
         private void OnTargetReach()
         {
+            _goblin.NavTileAgent.Stop();
             Skyvan skyvan;
             if (_goblin.Target.TryGetComponent(out skyvan))
             {

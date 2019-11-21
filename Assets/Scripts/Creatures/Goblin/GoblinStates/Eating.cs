@@ -13,6 +13,7 @@ namespace Svnvav.Samples
         {
             _goblin = (Goblin) goblin;
             _plant = _goblin.Target.GetComponent<Plant>();
+            _goblin.Animator.Play("Eating");
         }
         
         public override void GameUpdate(Creature goblin)

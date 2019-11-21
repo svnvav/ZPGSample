@@ -7,35 +7,39 @@ namespace Svnvav.Samples
     public class GoblinSearchTarget : StateComponent
     {
         [SerializeField] private float _searchRadius;
-        private Vector3 _wanderPoint;
+        [SerializeField] private SearchKeyPoint[] _keyPoints;
+
+        private int _currentKeyPointId;
+        private Vector3 _destination => _keyPoints[_currentKeyPointId].Position;
 
         private Goblin _goblin;
 
-        public override void Enter(Creature goblin)
+        public override void Enter(Creature creature)
         {
-            goblin.Target = null;
-            _goblin = (Goblin) goblin;
-            _wanderPoint = NewWanderPoint(goblin.transform.position);
-            _goblin.NavMeshAgent.SetDestination(_wanderPoint);
+            creature.Target = null;
+            _goblin = (Goblin) creature;
+            _currentKeyPointId = Random.Range(0, _keyPoints.Length);
+            _goblin.NavTileAgent.SetDestination(_destination);
+            creature.Animator.Play("Walk");
         }
         
         public override void GameUpdate(Creature goblin)
         {
             CheckSearchArea(_goblin);
             
-            var positionDif = goblin.transform.position - _wanderPoint;
+            var positionDif = goblin.transform.position - _destination;
             
-            if (positionDif.x * positionDif.x + positionDif.z * positionDif.z < 0.01f)
+            if (positionDif.x * positionDif.x + positionDif.y * positionDif.y < 0.01f)
             {
-                _wanderPoint = NewWanderPoint(goblin.transform.position);
-                _goblin.NavMeshAgent.SetDestination(_wanderPoint);
+                _currentKeyPointId = Random.Range(0, _keyPoints.Length);//TODO: what if the same point after random
+                _goblin.NavTileAgent.SetDestination(_destination);
             }
         }
         
         private void CheckSearchArea(Goblin goblin)
         {
             var position = goblin.transform.position;
-            var colliders = Physics.OverlapSphere(
+            var colliders = Physics2D.OverlapCircleAll(
                 position, _searchRadius
             );
 
@@ -66,18 +70,12 @@ namespace Svnvav.Samples
                 }
             }
         }
-        
-        private Vector3 NewWanderPoint(Vector3 current)
-        {
-            var wanderPointXY = Random.insideUnitCircle.normalized * _searchRadius;
-            return (current + new Vector3(wanderPointXY.x, 0, wanderPointXY.y));
-        }
 
         public override void Exit(Creature goblin)
         {
         }
 
-        private void OnDrawGizmos()
+        private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, _searchRadius);

@@ -5,7 +5,8 @@ namespace Svnvav.Samples
 {
     public abstract class Creature : MonoBehaviour
     {
-        private List<Effect> _effects;
+        [SerializeField] private Animator _animator;
+        public Animator Animator => _animator;
         
         [SerializeField] private CreatureStateMachine _stateMachine;
         public CreatureStateMachine StateMachine => _stateMachine;
@@ -13,11 +14,13 @@ namespace Svnvav.Samples
         [SerializeField] private Inventory _inventory;
         public Inventory Inventory => _inventory;
         
+        private List<Effect> _effects;
+        
         public Transform Target { get; set; }
 
         public abstract bool IsAlive { get; }
 
-        private void Awake()
+        public virtual void Initialize()
         {
             StateMachine.Initialize(this);
             _effects = new List<Effect>();

@@ -5,7 +5,7 @@ namespace Svnvav.Samples
     public class Attack : StateComponent
     {
         [SerializeField] private float _damagePerSecond = 100f;
-        [SerializeField] private float _attackRange = 2f;
+        [SerializeField] private float _attackRange = 1f;
         [SerializeField] private Skyvan _enemy;
         
         private Goblin _goblin;
@@ -14,6 +14,7 @@ namespace Svnvav.Samples
         {
             _goblin = (Goblin) goblin;
             _enemy = _goblin.Target.GetComponent<Skyvan>();
+            _goblin.Animator.Play("Attack");
         }
         
         public override void GameUpdate(Creature goblin)
@@ -31,7 +32,7 @@ namespace Svnvav.Samples
             }
             else
             {
-                _goblin.NavMeshAgent.SetDestination(_enemy.transform.position);
+                _goblin.NavTileAgent.SetDestination(_enemy.transform.position);
             }
         }
 

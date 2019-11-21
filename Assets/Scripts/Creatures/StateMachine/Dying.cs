@@ -11,6 +11,10 @@ namespace Svnvav.Samples
         public override void Enter(Creature creature)
         {
             _remain = _duration;
+            if (creature.Animator != null)
+            {
+                creature.Animator.Play("Dying");
+            }
         }
         
         public override void GameUpdate(Creature creature)

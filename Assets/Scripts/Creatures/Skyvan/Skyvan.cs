@@ -6,18 +6,27 @@ namespace Svnvav.Samples
 {
     public class Skyvan : Creature
     {
-        [SerializeField] private NavMeshAgent _navMeshAgent;
-        public NavMeshAgent NavMeshAgent => _navMeshAgent;
+        [SerializeField] private NavTileAgent _navTileAgent;
+        public NavTileAgent NavTileAgent => _navTileAgent;
 
         [SerializeField] private LifeBehaviour _lifeBehaviour;
 
         public override bool IsAlive => _lifeBehaviour.Health > 0f;
 
+        private void Start()
+        {
+            Initialize();
+        }
+
+        public override void Initialize()
+        {
+            NavTileAgent.Initialize();
+            base.Initialize();
+        }
+        
         protected override void GameUpdate()
         {
             _lifeBehaviour.GameUpdate(this);
         }
-
-        
     }
 }

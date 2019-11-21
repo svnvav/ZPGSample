@@ -4,8 +4,10 @@ namespace Svnvav.Samples
 {
     public class SkyvanGoToTarget : StateComponent
     {
-        private Skyvan _skyvan;
+        [SerializeField] private float _targetReachedRadius;
         
+        private Skyvan _skyvan;
+
         public override void Enter(Creature creature)
         {
             _skyvan = (Skyvan) creature;
@@ -20,18 +22,19 @@ namespace Svnvav.Samples
 
             var positionDif = transform.position - _skyvan.Target.position;
             
-            if (positionDif.x * positionDif.x + positionDif.z * positionDif.z < 1.5f)
+            if (positionDif.x * positionDif.x + positionDif.y * positionDif.y < _targetReachedRadius * _targetReachedRadius)
             {
                 OnTargetReach();
             }
             else
             {
-                _skyvan.NavMeshAgent.SetDestination(_skyvan.Target.position);
+                _skyvan.NavTileAgent.SetDestination(_skyvan.Target.position);
             }
         }
 
         private void OnTargetReach()
         {
+            _skyvan.NavTileAgent.Stop();
             Item item;
             if (_skyvan.Target.TryGetComponent(out item))
             {

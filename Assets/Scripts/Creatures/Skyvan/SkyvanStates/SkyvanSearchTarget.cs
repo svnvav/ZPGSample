@@ -5,25 +5,28 @@ namespace Svnvav.Samples
     public class SkyvanSearchTarget : StateComponent
     {
         [SerializeField] private float _searchRadius;
-        private Vector3 _wanderPoint;
+        [SerializeField] private SearchKeyPoint[] _keyPoints;
+
+        private int _currentKeyPointId;
+        private Vector3 _destination => _keyPoints[_currentKeyPointId].Position;
         
         private Skyvan _skyvan;
         public override void Enter(Creature creature)
         {
             creature.Target = null;
             _skyvan = (Skyvan) creature;
-            _wanderPoint = NewWanderPoint(_skyvan.transform.position);
-            _skyvan.NavMeshAgent.SetDestination(_wanderPoint);
+            _currentKeyPointId = Random.Range(0, _keyPoints.Length);
+            _skyvan.NavTileAgent.SetDestination(_destination);
         }
 
         public override void GameUpdate(Creature creature)
         {
-            var positionDif = creature.transform.position - _wanderPoint;
+            var positionDif = creature.transform.position - _destination;
             
-            if (positionDif.x * positionDif.x + positionDif.z * positionDif.z < 0.01f)
+            if (positionDif.x * positionDif.x + positionDif.y * positionDif.y < 0.01f)
             {
-                _wanderPoint = NewWanderPoint(creature.transform.position);
-                _skyvan.NavMeshAgent.SetDestination(_wanderPoint);
+                _currentKeyPointId = Random.Range(0, _keyPoints.Length);//TODO: what if the same point after random
+                _skyvan.NavTileAgent.SetDestination(_destination);
             }
             CheckSearchArea(_skyvan);
         }
@@ -36,7 +39,7 @@ namespace Svnvav.Samples
         private void CheckSearchArea(Skyvan skyvan)
         {
             var position = skyvan.transform.position;
-            var colliders = Physics.OverlapSphere(
+            var colliders = Physics2D.OverlapCircleAll(
                 position, _searchRadius
             );
 
@@ -59,10 +62,10 @@ namespace Svnvav.Samples
             }
         }
         
-        private Vector3 NewWanderPoint(Vector3 current)
+        private void OnDrawGizmosSelected()
         {
-            var wanderPointXY = Random.insideUnitCircle.normalized * _searchRadius;
-            return (current + new Vector3(wanderPointXY.x, 0, wanderPointXY.y));
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawWireSphere(transform.position, _searchRadius);
         }
     }
 }
