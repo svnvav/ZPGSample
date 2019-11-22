@@ -1,6 +1,5 @@
-using System;
+
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 namespace Svnvav.Samples
@@ -12,7 +11,7 @@ namespace Svnvav.Samples
 
         public void Put(Item item)
         {
-            item.transform.parent = transform;
+            item.transform.SetParent(transform, false);
             _items.Add(item);
         }
         
