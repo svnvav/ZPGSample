@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7b2e42451d640d48582240b4c296e94, type: 3}
   m_Name: CustomTile
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 442204d8227a76b4d92588b2d9263e5c, type: 3}
+  m_Sprite: {fileID: -7128752230099256568, guid: 0297da88c30a9fe4aac731f7fcdb8184,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

@@ -42,16 +42,19 @@ namespace Svnvav.Samples
             if (_goblin.Target.TryGetComponent(out skyvan))
             {
                 _goblin.StateMachine.MoveNext(Command.EnemyFound);
+                return;
             }
             Item item;
             if (_goblin.Target.TryGetComponent(out item))
             {
                 _goblin.StateMachine.MoveNext(Command.ItemFound);
+                return;
             }
             Plant plant;
             if (_goblin.Target.TryGetComponent(out plant))
             {
                 _goblin.StateMachine.MoveNext(Command.FoodFound);
+                return;
             }
         }
         

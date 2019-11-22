@@ -42,9 +42,9 @@ namespace Svnvav.Samples
 
             while (open.Count > 0)
             {
-                open = open.OrderBy(x => x.F).ToList();
-                var current = open[0];
-                open.RemoveAt(0);
+                open.Sort((x1, x2) => x1.F > x2.F ? -1 : 1);
+                var current = open[open.Count - 1];
+                open.RemoveAt(open.Count - 1);
                 closed.Add(current);
                 if (current.pos == start)
                 {
@@ -95,8 +95,7 @@ namespace Svnvav.Samples
                 loopCheck++;
                 if(loopCheck > loopBound)
                     throw new Exception("infinite loop");
-
-                //var prev = current;
+                
                 current = closed.First(n => n.pos == current.pos + current.step);
                 path.Add(current.pos);
             }

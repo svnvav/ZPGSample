@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,9 +10,19 @@ namespace Svnvav.Samples
         [SerializeField] private List<Item> _items;
         public int ItemsCount => _items.Count;
 
+        private void Awake()
+        {
+            for (var index = 0; index < _items.Count; index++)
+            {
+                _items[index].SetInventory(this, index);
+            }
+        }
+
         public void Put(Item item)
         {
-            item.transform.SetParent(transform, false);
+            item.transform.SetParent(transform);
+            item.transform.localPosition = Vector3.zero;
+            item.SetInventory(this, _items.Count);
             _items.Add(item);
         }
         

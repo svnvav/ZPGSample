@@ -39,11 +39,13 @@ namespace Svnvav.Samples
             if (_skyvan.Target.TryGetComponent(out item))
             {
                 _skyvan.StateMachine.MoveNext(Command.ItemFound);
+                return;
             }
-            Inventory inventory;
-            if (_skyvan.Target.TryGetComponent(out inventory))
+            Goblin creature;
+            if (_skyvan.Target.TryGetComponent(out creature))
             {
                 _skyvan.StateMachine.MoveNext(Command.InventoryFound);
+                return;
             }
         }
         
